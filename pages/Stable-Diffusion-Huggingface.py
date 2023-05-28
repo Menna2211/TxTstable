@@ -10,7 +10,7 @@ import time
     #return pipe
 from diffusers import StableDiffusionPipeline
 model_id = "prompthero/openjourney"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32, batch_size=16)
 
 
 
