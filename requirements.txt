@@ -1,9 +1,6 @@
 streamlit
 huggingface-hub
 torch
-transformers
 accelerate
 diffusers
-safetensors
-tokenizers
 optimum[onnxruntime]
