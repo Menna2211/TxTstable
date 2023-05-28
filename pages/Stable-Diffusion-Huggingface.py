@@ -1,13 +1,17 @@
 import streamlit as st
 import torch
 import time
-from optimum.onnxruntime import ORTStableDiffusionPipeline
+#from optimum.onnxruntime import ORTStableDiffusionPipeline
 
 #@st.cache_resource(show_spinner=False ,ttl=3600) 
 #def get_model():
-model_id = "runwayml/stable-diffusion-v1-5"
-pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
+#model_id = "runwayml/stable-diffusion-v1-5"
+#pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
     #return pipe
+from diffusers import StableDiffusionPipeline
+model_id = "prompthero/openjourney"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+
 
 
 st.title("Stable Diffusion App")
