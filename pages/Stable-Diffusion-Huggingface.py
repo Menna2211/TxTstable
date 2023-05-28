@@ -10,8 +10,19 @@ from diffusers import StableDiffusionPipeline
 #pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
     #return pipe
     
-model_id = "runwayml/stable-diffusion-v1-5"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+#model_id = "runwayml/stable-diffusion-v1-5"
+#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+
+#model_id = "prompthero/openjourney"
+#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+
+from diffusers.models import AutoencoderKL
+from diffusers import StableDiffusionPipeline
+
+model = "CompVis/stable-diffusion-v1-4"
+vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse")
+pipe = StableDiffusionPipeline.from_pretrained(model, vae=vae)
+
 
 st.title("Stable Diffusion App")
 # define the layout of your app
@@ -24,8 +35,7 @@ if not submit_button:
   st.warning('Please Press Compute....')
   st.stop()
 
-#model_id = "prompthero/openjourney"
-#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+
 
 # Display the generated text
 if submit_button:
