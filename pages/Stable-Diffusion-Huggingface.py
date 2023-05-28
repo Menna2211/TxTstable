@@ -1,14 +1,17 @@
 import streamlit as st
 import torch
 import time
-#from optimum.onnxruntime import ORTStableDiffusionPipeline
+from diffusers import StableDiffusionPipeline
 
 #@st.cache_resource(show_spinner=False ,ttl=3600) 
 #def get_model():
+#from optimum.onnxruntime import ORTStableDiffusionPipeline
 #model_id = "runwayml/stable-diffusion-v1-5"
 #pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
     #return pipe
-
+    
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
 st.title("Stable Diffusion App")
 # define the layout of your app
@@ -21,10 +24,8 @@ if not submit_button:
   st.warning('Please Press Compute....')
   st.stop()
 
-
-from diffusers import StableDiffusionPipeline
-model_id = "prompthero/openjourney"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+#model_id = "prompthero/openjourney"
+#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
 # Display the generated text
 if submit_button:
