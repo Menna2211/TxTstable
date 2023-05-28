@@ -8,7 +8,6 @@ def get_model():
     model_id = "runwayml/stable-diffusion-v1-5"
     pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
     return pipe
-    return pipe
 
 pipe=get_model()
 
