@@ -6,7 +6,8 @@ from optimum.onnxruntime import ORTStableDiffusionPipeline
 @st.cache_resource(show_spinner=False ,ttl=3600) 
 def get_model():
     model_id = "runwayml/stable-diffusion-v1-5"
-    pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, export=True)
+    pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
+    return pipe
     return pipe
 
 pipe=get_model()
