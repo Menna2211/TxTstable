@@ -12,17 +12,13 @@ from diffusers import StableDiffusionPipeline
     
 #model_id = "runwayml/stable-diffusion-v1-5"
 #pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+@st.cache_resource(show_spinner=False ,ttl=3600) 
+def get_model():
+    model_id = "prompthero/openjourney"
+    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
+    return pipe
 
-#model_id = "prompthero/openjourney"
-#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
-
-from diffusers.models import AutoencoderKL
-from diffusers import StableDiffusionPipeline
-
-model = "CompVis/stable-diffusion-v1-4"
-vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse")
-pipe = StableDiffusionPipeline.from_pretrained(model, vae=vae)
-
+pipe=get_model()
 
 st.title("Stable Diffusion App")
 # define the layout of your app
@@ -31,11 +27,7 @@ st.title("Stable Diffusion App")
 prompt = st.text_input("Write your sentence:")
 submit_button = st.button("Compute")
 if not submit_button:
-  time.sleep(3)
-  st.warning('Please Press Compute....')
   st.stop()
-
-
 
 # Display the generated text
 if submit_button:
