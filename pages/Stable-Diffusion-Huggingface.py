@@ -8,10 +8,6 @@ import time
 #model_id = "runwayml/stable-diffusion-v1-5"
 #pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
     #return pipe
-from diffusers import StableDiffusionPipeline
-model_id = "prompthero/openjourney"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
-
 
 
 st.title("Stable Diffusion App")
@@ -24,6 +20,11 @@ if not submit_button:
   time.sleep(3)
   st.warning('Please Press Compute....')
   st.stop()
+
+
+from diffusers import StableDiffusionPipeline
+model_id = "prompthero/openjourney"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
 # Display the generated text
 if submit_button:
