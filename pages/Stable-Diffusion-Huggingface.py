@@ -4,7 +4,7 @@ import time
 from diffusers import StableDiffusionPipeline
 
 
-@st.cache_resource(show_spinner=False ,ttl=3600) 
+@st.cache_resource(show_spinner=False ) 
 def get_model():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if device == "cuda" else torch.float32
