@@ -13,17 +13,17 @@ from diffusers import StableDiffusionPipeline
 #model_id = "runwayml/stable-diffusion-v1-5"
 #pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
-@st.cache_resource(show_spinner=False ,ttl=3600) 
-def get_model():
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    torch_dtype = torch.float16 if device == "cuda" else torch.float32
+#@st.cache_resource(show_spinner=False ,ttl=3600) 
+#def get_model():
+device = "cuda" if torch.cuda.is_available() else "cpu"
+torch_dtype = torch.float16 if device == "cuda" else torch.float32
 
-    model_id = "runwayml/stable-diffusion-v1-5"
-    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
-    pipe = pipe.to(device)
-    return pipe
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
+pipe = pipe.to(device)
+    #return pipe
 
-pipe=get_model()
+#pipe=get_model()
 
 st.title("Stable Diffusion App")
 # define the layout of your app
