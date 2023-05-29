@@ -3,15 +3,6 @@ import torch
 import time
 from diffusers import StableDiffusionPipeline
 
-#@st.cache_resource(show_spinner=False ,ttl=3600) 
-#def get_model():
-#from optimum.onnxruntime import ORTStableDiffusionPipeline
-#model_id = "runwayml/stable-diffusion-v1-5"
-#pipe = ORTStableDiffusionPipeline.from_pretrained(model_id, framework="pt")
-    #return pipe
-    
-#model_id = "runwayml/stable-diffusion-v1-5"
-#pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
 @st.cache_resource(show_spinner=False ,ttl=3600) 
 def get_model():
