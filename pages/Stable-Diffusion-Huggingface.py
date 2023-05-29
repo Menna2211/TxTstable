@@ -3,18 +3,12 @@ import torch
 import time
 from diffusers import StableDiffusionPipeline
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+torch_dtype = torch.float16 if device == "cuda" else torch.float32
 
-@st.cache(show_spinner=False ) 
-def get_model():
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    torch_dtype = torch.float16 if device == "cuda" else torch.float32
-
-    model_id = "runwayml/stable-diffusion-v1-5"
-    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
-    pipe = pipe.to(device)
-    return pipe
-
-pipe=get_model()
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
+pipe = pipe.to(device)
 
 st.title("Stable Diffusion App")
 # define the layout of your app
@@ -24,7 +18,6 @@ prompt = st.text_input("Write your sentence:")
 submit_button = st.button("Compute")
 if not submit_button:
    st.stop()
-
 
 # Display the generated text
 if submit_button:
