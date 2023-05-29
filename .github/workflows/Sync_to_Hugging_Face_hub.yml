@@ -17,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://HF_Menna2211:$HF_TOKEN@huggingface.co/spaces/Menna2211/TxTimg main
+        run: git push --force https://HF_Menna2211:$HF_TOKEN@huggingface.co/spaces/Menna2211/TxTimg main
