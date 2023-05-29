@@ -3,8 +3,8 @@ title: TxTimg
 emoji: {{emoji}}
 colorFrom: blue
 colorTo: red
-sdk: {{sdk}}
-sdk_version: streamlit
+sdk: streamlit
+sdk_version: 1.17.0
 app_file: Home.py
 pinned: false
 ---
