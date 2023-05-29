@@ -13,17 +13,17 @@ from diffusers import StableDiffusionPipeline
 #model_id = "runwayml/stable-diffusion-v1-5"
 #pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float32)
 
-#@st.cache_resource(show_spinner=False ,ttl=3600) 
-#def get_model():
-device = "cuda" if torch.cuda.is_available() else "cpu"
-torch_dtype = torch.float16 if device == "cuda" else torch.float32
+@st.cache_resource(show_spinner=False ,ttl=3600) 
+def get_model():
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    torch_dtype = torch.float16 if device == "cuda" else torch.float32
 
-model_id = "runwayml/stable-diffusion-v1-5"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
-pipe = pipe.to(device)
-    #return pipe
+    model_id = "runwayml/stable-diffusion-v1-5"
+    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch_dtype)
+    pipe = pipe.to(device)
+    return pipe
 
-#pipe=get_model()
+pipe=get_model()
 
 st.title("Stable Diffusion App")
 # define the layout of your app
@@ -32,17 +32,15 @@ st.title("Stable Diffusion App")
 prompt = st.text_input("Write your sentence:")
 submit_button = st.button("Compute")
 if not submit_button:
-  st.stop()
+   st.stop()
+
 
 # Display the generated text
 if submit_button:
-    progress_text = "Operation in progress. Please wait."
-    bar = st.progress(0, text=progress_text)
-    for percent_complete in range(100):
+    with st.spinner('Wait for it...'):
         generated_img=pipe(prompt).images[0]
         time.sleep(0.1)
-        bar.progress(percent_complete + 1, text=progress_text)
-
+        
     st.write("Generated Image:")
     st.image(generated_img)
     time.sleep(5)
